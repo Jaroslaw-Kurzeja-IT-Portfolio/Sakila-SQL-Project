@@ -1,6 +1,79 @@
 # Stage 6 — Modifying Existing Data
 
 # 6.1 Add a test customer to Sakila.
+SHOW FULL TABLES;
+SELECT * FROM customer;
+DESC customer;
+SELECT * FROM address;
+DESC address;
+SELECT * FROM city;
+DESC city;
+SELECT * FROM country;
+DESC country;
+
+SELECT
+    country_id,
+    country
+FROM country
+WHERE country = 'Germany';
+
+SELECT
+    city, city_id, country_id
+FROM city
+WHERE city = 'Erlangen';
+
+DELETE FROM city
+WHERE city_id = 601;
+
+INSERT INTO city
+    (city, country_id)
+VALUES ('Erlangen', 38);
+
+SELECT * FROM address;
+DESC address;
+
+SELECT *
+FROM address
+WHERE address = '1 Bahnhofsplatz';
+
+INSERT INTO address
+    (address,
+    district,
+    city_id,
+    phone,
+    location)
+VALUES (
+'1 Bahnhofsplatz',
+'Bavaria',
+160,
+805583457,
+POINT(49.59611, 11.00194)
+    );
+
+UPDATE address
+SET district = 'Bayern'
+WHERE address_id = 606;
+
+INSERT INTO customer
+    (store_id,
+    first_name,
+    last_name,
+    address_id)
+VALUES (
+1,
+'Adidas',
+'Puma',
+606
+    );
+
+SELECT *
+FROM customer
+WHERE address_id = 606;
+
+ALTER TABLE customer
+MODIFY create_date DATETIME NOT NULL
+DEFAULT CURRENT_TIMESTAMP;
+
 
 # 6.2 Verify that the customer has been saved correctly.
 
