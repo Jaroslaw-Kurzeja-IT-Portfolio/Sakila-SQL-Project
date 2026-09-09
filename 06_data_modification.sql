@@ -1,5 +1,6 @@
 # Stage 6 — Modifying Existing Data
 
+# test
 # 6.1 Add a test customer to Sakila.
 SHOW FULL TABLES;
 SELECT * FROM customer;
