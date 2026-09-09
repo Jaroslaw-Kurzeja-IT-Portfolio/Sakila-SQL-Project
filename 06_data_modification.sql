@@ -76,19 +76,67 @@ DEFAULT CURRENT_TIMESTAMP;
 
 
 # 6.2 Verify that the customer has been saved correctly.
+SELECT *
+FROM customer
+WHERE address_id = 606;
+
 
 # 6.3 Update the test customer's data.
+UPDATE address
+SET district = 'Bavaria'
+WHERE address_id = 606;
+
+UPDATE customer
+SET first_name = 'Puma',
+    last_name = 'Adidas'
+WHERE customer_id = 600;
+
 
 # 6.4 Verify the changes made to the customer data.
+SELECT * FROM address
+WHERE address_id = 606;
+
+SELECT *
+FROM customer
+ORDER BY customer_id DESC
+LIMIT 0, 1;
+# customer_id = 600
 
 # 6.5 Delete the test customer and verify the result.
+DELETE FROM customer
+WHERE customer_id = 600;
+
+SELECT *
+FROM customer
+ORDER BY customer_id DESC
+LIMIT 0, 1;
+
 
 # 6.6 Make several changes within one transaction and roll them back using ROLLBACK.
 
+
+
+
 # 6.7 Repeat the operation and commit the changes using COMMIT.
+
+
+
+
 
 # 6.8 Attempt an operation that violates a FOREIGN KEY constraint and analyze the error.
 
+
+
+
 # 6.9 Attempt to violate a UNIQUE constraint and analyze the error.
 
+
+
+
+
 # 6.10 Based on the test results, correct the query or data so that the operation completes successfully.
+
+
+
+
+
