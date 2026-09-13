@@ -1,6 +1,80 @@
 # Stage 7 — Database Expansion
 
 # 7.1 The company wants to store additional information about employees. Add a new column to the staff table and populate it for existing employees.
+SHOW FULL TABLES;
+DESC staff;
+SELECT * FROM staff;
+
+ALTER TABLE staff
+DROP COLUMN knows_sql;
+
+#
+ALTER TABLE staff
+ADD COLUMN knows_sql
+BOOLEAN;
+
+ALTER TABLE staff
+ADD COLUMN knows_sql
+TINYINT(1) UNSIGNED;
+
+ALTER TABLE staff
+ADD COLUMN knows_sql
+BOOLEAN NOT NULL;
+
+ALTER TABLE staff
+ADD COLUMN knows_sql
+BOOLEAN NOT NULL DEFAULT FALSE;
+
+ALTER TABLE staff
+ADD COLUMN knows_sql
+BOOLEAN NOT NULL DEFAULT TRUE;
+
+ALTER TABLE staff
+ADD COLUMN knows_sql
+BOOLEAN NOT NULL DEFAULT 10;
+
+#
+ALTER TABLE staff
+DROP COLUMN knows_sql;
+
+SELECT * FROM staff;
+
+#
+ALTER TABLE staff
+MODIFY COLUMN knows_sql
+BOOLEAN NOT NULL DEFAULT 0;
+
+ALTER TABLE staff
+MODIFY COLUMN knows_sql
+BOOLEAN NOT NULL DEFAULT 1;
+
+# Updating Column Values
+UPDATE staff
+SET staff.knows_sql = TRUE
+WHERE staff_id = 1;
+
+UPDATE staff
+SET staff.knows_sql = FALSE
+WHERE staff_id = 2;
+
+# BOOLEAN / TINYINT(1): -128  127
+# TINYINT(1) UNSIGNED: 0  255
+UPDATE staff
+SET staff.knows_sql = 128
+WHERE staff_id = 2;
+
+SELECT * FROM staff;
+
+# Other Column - Additional Exercise
+ALTER TABLE staff
+ADD COLUMN knows BOOLEAN;
+
+ALTER TABLE staff
+RENAME COLUMN knows TO knows_pyhton;
+
+ALTER TABLE staff
+DROP COLUMN knows_pyhton;
+
 
 # 7.2 The company wants to divide employees into departments. Design and create a department table.
 
