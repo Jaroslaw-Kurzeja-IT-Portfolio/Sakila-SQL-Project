@@ -1,29 +1,105 @@
-# Stage 1 — SELECT and Filtering
+SELECT DATABASE();
 
+# answer 0.3
+SHOW TABLES;
 
-# 1.1 Display the first and last names of all actors.
+SELECT COUNT(*) FROM information_schema.tables
+WHERE table_schema = 'sakila';
+
+USE information_schema;
+SHOW TABLES; 
+
+SELECT table_name FROM information_schema.tables
+WHERE table_schema = 'information_schema';
+
+SELECT COUNT(*) FROM information_schema.tables
+WHERE table_schema = 'information_schema';
+
+SELECT * FROM information_schema.columns;
+
+DESCRIBE tables;
+SHOW COLUMNS FROM tables;
+
+SHOW CREATE TABLE tables;
+
+SHOW CREATE TABLE aaa.aaa;
+
+# answer 0.4
+
+SELECT table_name FROM information_schema.tables
+WHERE table_schema = 'sakila';
+
+DESC actor;
+DESC address;
+
+# tabela 'adress' nie ma foregin key
+SHOW CREATE TABLE address;
+
+DESC film;
+SHOW CREATE TABLE film;
+
+SELECT CONCAT('SHOW CREATE TABLE `', TABLE_NAME, '`;')
+FROM information_schema.tables
+WHERE TABLE_SCHEMA = 'sakila'
+  AND TABLE_TYPE = 'BASE TABLE';
+  
+
+SHOW CREATE TABLE `actor`;
+SHOW CREATE TABLE `address`;
+SHOW CREATE TABLE `category`;
+SHOW CREATE TABLE `city`;
+SHOW CREATE TABLE `country`;
+SHOW CREATE TABLE `customer`;
+SHOW CREATE TABLE `film`;
+SHOW CREATE TABLE `film_actor`;
+SHOW CREATE TABLE `film_category`;
+SHOW CREATE TABLE `film_text`;
+SHOW CREATE TABLE `inventory`;
+SHOW CREATE TABLE `language`;
+SHOW CREATE TABLE `payment`;
+SHOW CREATE TABLE `rental`;
+SHOW CREATE TABLE `staff`;
+SHOW CREATE TABLE `store`;
+
+# answer 0.6
+# DDL: w MySQL Workbench można wygenerować skrypt DDL przez:
+# Server → Data Export → wybranie schematu i tabel → Export to Self-Contained File.
+# Otrzymujemy w ten sposób definicje tabel (CREATE TABLE),
+# czyli informacje o ich strukturze, kolumnach, typach danych, kluczach, ograniczeniach i właściwościach.
+
+# answer 0.5 
+# CONSTRAINT `fk_address_city`
+	# FOREIGN KEY (`city_id`)
+	# REFERENCES `city` (`city_id`)
+    # ON DELETE RESTRICT
+    # ON UPDATE CASCADE
+
+# answer 0.7
+USE sakila_restore;
+SELECT COUNT(*) FROM address;
+
+USE sakila;
+
+# answer 1.1
 SELECT * FROM actor;
 SELECT first_name, last_name FROM actor;
 SELECT CONCAT(first_name, ' ', last_name) AS actors FROM actor;
 SELECT COUNT(actor_id) AS `how many actors` FROM actor;
 
-
-# 1.2 Find all actors with the last name WAHLBERG.
+# answer 1.2
 SELECT CONCAT(first_name, ' ', last_name) AS actors FROM actor
 	WHERE last_name = 'WAHLBERG';
 SELECT COUNT(actor_id) AS `how many WAHLBERG` FROM actor
 	WHERE last_name = 'WAHLBERG';
 
-
-# 1.3 Display all distinct actor last names, without duplicates.
+#  answer 1.3
 SELECT DISTINCT last_name AS `different last names of actors` FROM actor;
 SELECT
 	COUNT(DISTINCT last_name) AS `how many different last names of actors`,
     COUNT(actor_id) AS `how many actors`
 FROM actor;
 
-
-# 1.4 Find films with a running time between 90 and 120 minutes.
+# answer 1.4
 SELECT * FROM film;
 DESC film;
 SELECT `title` FROM film
@@ -49,8 +125,7 @@ SELECT
 	COUNT(film.film_id) AS `amount of all films`
 FROM film_length_90_120, film;
 
-
-# 1.5 Find films whose title starts with the letter A.
+# amswer 1.5
 SELECT * FROM film;
 SELECT title FROM film
 	WHERE title LIKE 'A%'
@@ -58,8 +133,7 @@ SELECT title FROM film
 SELECT COUNT(title) FROM film
 	WHERE title LIKE 'A%';
 
-
-# 1.6 Display the 10 longest films.
+# answer 1.6
 SELECT * FROM film;
 SELECT
 	ROW_NUMBER() OVER(ORDER BY length DESC, title ASC) AS position,
@@ -76,8 +150,7 @@ SELECT
 	CONCAT(ROUND(AVG(length), 0), ' mins') AS `avrerage duration of all films`
 FROM film;
 
-
-# 1.7 Find films with a replacement cost greater than 25.
+# answer 1.7
 SELECT title, replacement_cost FROM film
 	WHERE replacement_cost > 25
 	ORDER BY replacement_cost DESC;
@@ -89,8 +162,7 @@ SELECT
 FROM film
 WHERE replacement_cost > 25;
 
-
-# 1.8 Find customers whose last names start with the letters S–Z.
+# answer 1.8
 SELECT * FROM  customer;
 SELECT 
 	CONCAT(last_name, ', ', first_name) AS `customers with last name S-Z`
