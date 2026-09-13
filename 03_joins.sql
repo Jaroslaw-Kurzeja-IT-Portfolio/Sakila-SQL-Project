@@ -1,4 +1,7 @@
-# answer 3.1
+# Stage 3 — Joining Data
+
+
+# 3.1 Prepare a list of films along with their language.
 SHOW FULL TABLES;
 SELECT * FROM film;
 SELECT * FROM language;
@@ -33,7 +36,7 @@ JOIN language
 ON film.language_id = language.language_id;
 
 
-# answer 3.2
+# 3.2 Prepare a list of films along with their categories.
 SHOW FULL TABLES;
 SELECT * FROM film;
 SELECT * FROM film_category;
@@ -51,7 +54,7 @@ GROUP BY film.film_id
 ORDER BY film.title;
 
 
-# answer 3.3
+# 3.3 For a specified film, prepare a list of all actors appearing in it.
 SHOW FULL TABLES;
 SELECT * FROM film;
 SELECT * FROM film_actor;
@@ -68,7 +71,8 @@ JOIN actor
 GROUP BY film.film_id
 ORDER BY film.title;
 
-# answer 3.4
+
+# 3.4 Find all films in which NICK WAHLBERG appeared.
 SHOW FULL TABLES;
 SELECT * FROM film;
 SELECT * FROM film_actor;
@@ -88,7 +92,7 @@ WHERE
 	actor.last_name = 'WAHLBERG';
 
 
-# answer 3.5 
+# 3.5 Prepare customer information together with their address, city, and country.
 SHOW FULL TABLES;
 SELECT * FROM customer;
 SELECT * FROM address;
@@ -108,7 +112,8 @@ JOIN city
 JOIN country
 	ON city.country_id = country.country_id;
 
-# answer 3.6
+
+# 3.6 The company wants to find all customers living in Canada.
 SHOW FULL TABLES;
 SELECT * FROM customer;
 SELECT * FROM address;
@@ -129,7 +134,8 @@ JOIN country
 	ON city.country_id = country.country_id
 WHERE country.country = 'Canada';
 
-# answer 3.7
+
+# 3.7 Prepare a breakdown of the number of films for each actor.
 SHOW FULL TABLES;
 SELECT * FROM actor;
 SELECT * FROM film_actor;
@@ -148,7 +154,7 @@ GROUP BY actor.actor_id
 ORDER BY actor.actor_id;
 
 
-# answer 3.8
+# 3.8 Find the 10 actors who appeared in the largest number of films.
 SHOW FULL TABLES;
 SELECT * FROM actor;
 SELECT * FROM film_actor;
@@ -166,14 +172,5 @@ JOIN film
 GROUP BY actor.actor_id
 ORDER BY COUNT(film.title) DESC
 LIMIT 0, 10;
-
-
-
-
-
-
-
-
-
 
 
